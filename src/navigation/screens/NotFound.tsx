@@ -1,20 +1,34 @@
-import { Text, Button } from '@react-navigation/elements';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export function NotFound() {
   return (
-    <View style={styles.container}>
-      <Text>404</Text>
-      <Button screen="HomeTabs">Go to Home</Button>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <View style={styles.content}>
+        <Text style={styles.description}>
+          The page you're looking for doesn't exist.
+        </Text>
+      </View>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    padding: 16,
+  },
+  content: {
     alignItems: 'center',
-    gap: 10,
+    flex: 1,
+    gap: 8,
+    justifyContent: 'center',
+  },
+  description: {
+    color: '#64748b',
+    fontFamily: 'SpaceGrotesk_400Regular',
+    fontSize: 14,
+    lineHeight: 21,
+    textAlign: 'center',
   },
 });

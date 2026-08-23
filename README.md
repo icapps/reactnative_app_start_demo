@@ -1,44 +1,17 @@
-# Starter Template with React Navigation
-
-This is a minimal starter template for React Native apps using Expo and React Navigation.
-
-## Launch your own
-
-[![Launch with Expo](https://github.com/expo/examples/blob/master/.gh-assets/launch.svg?raw=true)](https://launch.expo.dev/?github=https://github.com/expo/examples/tree/master/with-react-navigation)
-
-It includes the following:
-
-- Example [Native Stack](https://reactnavigation.org/docs/native-stack-navigator) with a nested [Bottom Tab](https://reactnavigation.org/docs/bottom-tab-navigator)
-- Web support with [React Native for Web](https://necolas.github.io/react-native-web/)
-- TypeScript support and configured for React Navigation
-- Automatic [deep link](https://reactnavigation.org/docs/deep-linking) and [URL handling configuration](https://reactnavigation.org/docs/configuring-links)
-- Theme support [based on system appearance](https://reactnavigation.org/docs/themes/#using-the-operating-system-preferences)
-- Expo [Development Build](https://docs.expo.dev/develop/development-builds/introduction/) with [Continuous Native Generation](https://docs.expo.dev/workflow/continuous-native-generation/)
-- Edge-to-edge configured on Android with [`react-native-edge-to-edge`](https://www.npmjs.com/package/react-native-edge-to-edge)
-
-## Getting Started
-
-1. Create a new project using this template:
-
-   ```sh
-   npx create-expo-app --example with-react-navigation
-   yarn create expo-app --example with-react-navigation
-   pnpm create expo-app --example with-react-navigation
-   bun create expo-app --example with-react-navigation
-   ```
+# App Start Demo
 
 ## Running the app
 
 - Install the dependencies:
 
   ```sh
-  npx expo install
+  npm install
   ```
 
 - Start the development server:
 
   ```sh
-  npx expo start
+  npm run start
   ```
 
 - Build and run iOS and Android development builds:
@@ -51,11 +24,13 @@ It includes the following:
 
 - In the terminal running the development server, press `i` to open the iOS simulator, `a` to open the Android device or emulator, or `w` to open the web browser.
 
-## Resources
+## Heavy module loading strategy
 
-- [React Navigation documentation](https://reactnavigation.org/)
-- [Expo documentation](https://docs.expo.dev/)
+Use the switch on the Home screen to choose the Heavy module loading strategy:
 
----
+- `'eager'` evaluates the Heavy module during app startup.
+- `'lazy'` evaluates it only when the Heavy tab opens.
 
-Demo assets are from [lucide.dev](https://lucide.dev/)
+The preference is persisted with MMKV and defaults to `'eager'`. It applies the next time the app starts, because the navigator chooses its import path while the JavaScript bundle is evaluating. Use a full reload or relaunch when demonstrating the change; Fast Refresh can preserve or re-evaluate modules inconsistently.
+
+After each change, cold-restart the app. In lazy mode, stay on Home first, then open Heavy and watch the loading state and console logs. The Heavy screen copy shows the active strategy.

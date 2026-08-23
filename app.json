@@ -1,40 +1,33 @@
 {
   "expo": {
-    "name": "app-start-demo",
-    "slug": "app-start-demo",
-    "version": "1.0.0",
+    "name": "App Start Demo",
+    "version": "0.0.1",
     "orientation": "portrait",
     "icon": "src/assets/images/icon.png",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
     "scheme": "appstartdemo",
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.chennara.icapps.appstartdemo"
+      "bundleIdentifier": "be.rnmeetup.appstartdemo"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "src/assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "src/assets/images/icon.png",
+        "backgroundColor": "#002548"
       },
-      "package": "com.chennara.icapps.appstartdemo"
-    },
-    "web": {
-      "favicon": "src/assets/images/favicon.png"
+      "package": "be.rnmeetup.appstartdemo"
     },
     "plugins": [
       "expo-asset",
       [
         "expo-splash-screen",
         {
-          "backgroundColor": "#ffffff",
-          "image": "src/assets/images/splash-icon.png"
+          "backgroundColor": "#e7edf4",
+          "image": "./src/assets/images/icon.png"
         }
       ],
       "expo-font",
-      "expo-image",
-      "expo-status-bar",
-      "expo-web-browser"
+      "expo-status-bar"
     ]
   }
 }

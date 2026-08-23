@@ -1,50 +1,40 @@
-import 'react-native-reanimated';
-import { DarkTheme, DefaultTheme } from '@react-navigation/native';
+import {
+  SpaceGrotesk_400Regular,
+  SpaceGrotesk_600SemiBold,
+  SpaceGrotesk_700Bold,
+} from '@expo-google-fonts/space-grotesk';
 import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
-import * as React from 'react';
-import { useColorScheme } from 'react-native';
+import { StatusBar } from 'expo-status-bar';
 
-import { Colors } from './constants/Colors';
-import { Navigation } from './navigation';
+import { RootNavigator } from './navigation/RootNavigator';
 
 SplashScreen.preventAutoHideAsync();
 
 export function App() {
-  const colorScheme = useColorScheme();
-  const [loaded] = useFonts({
-    SpaceMono: require('./assets/fonts/SpaceMono-Regular.ttf'),
+  const [hasLoadedFonts] = useFonts({
+    SpaceGrotesk_400Regular,
+    SpaceGrotesk_600SemiBold,
+    SpaceGrotesk_700Bold,
   });
 
-  if (!loaded) {
-    // Async font loading only occurs in development.
+  if (!hasLoadedFonts) {
+    // Async font loading only occurs in development
     return null;
   }
 
-  const theme =
-    colorScheme === 'dark'
-      ? {
-          ...DarkTheme,
-          colors: { ...DarkTheme.colors, primary: Colors[colorScheme ?? 'light'].tint },
-        }
-      : {
-          ...DefaultTheme,
-          colors: { ...DefaultTheme.colors, primary: Colors[colorScheme ?? 'light'].tint },
-        };
-
   return (
-    <Navigation
-      theme={theme}
-      linking={{
-        enabled: 'auto',
-        prefixes: [
-          // Change the scheme to match your app's scheme defined in app.json
-          'helloworld://',
-        ],
-      }}
-      onReady={() => {
-        SplashScreen.hideAsync();
-      }}
-    />
+    <>
+      <StatusBar style="dark" />
+      <RootNavigator
+        linking={{
+          enabled: 'auto',
+          prefixes: ['appstartdemo://'],
+        }}
+        onReady={() => {
+          SplashScreen.hideAsync();
+        }}
+      />
+    </>
   );
 }
