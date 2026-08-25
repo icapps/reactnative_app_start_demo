@@ -8,6 +8,7 @@ import { use } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 import { INITIAL_HEAVY_LOADING_STRATEGY } from '@/features/heavy/heavyLoadingStrategy';
+import { fonts } from '@/utils/fonts';
 
 import { RootNavigationStackContext } from './NavigationStackProvider';
 import { ForceUpdate } from './screens/ForceUpdate';
@@ -34,12 +35,15 @@ const styles = StyleSheet.create({
     paddingTop: 8,
   },
   tabBarLabel: {
-    fontFamily: 'SpaceGrotesk_600SemiBold',
-    fontSize: 11,
+    fontFamily: fonts.regular,
+    fontSize: 12,
     letterSpacing: 0.2,
   },
+  tabBarLabelActive: {
+    fontFamily: fonts.semiBold,
+  },
   tabIcon: {
-    fontSize: 18,
+    fontSize: 20,
   },
 });
 
@@ -49,7 +53,17 @@ const MainStack = createBottomTabNavigator({
     sceneStyle: styles.scene,
     tabBarActiveTintColor: '#002548',
     tabBarInactiveTintColor: '#94a3b8',
-    tabBarLabelStyle: styles.tabBarLabel,
+    tabBarLabel: ({ children, color, focused }) => (
+      <Text
+        style={[
+          styles.tabBarLabel,
+          focused && styles.tabBarLabelActive,
+          { color },
+        ]}
+      >
+        {children}
+      </Text>
+    ),
     tabBarStyle: styles.tabBar,
   },
   // biome-ignore assist/source/useSortedKeys: We want to keep the order of the tabs as defined here, so we disable the sorting of keys

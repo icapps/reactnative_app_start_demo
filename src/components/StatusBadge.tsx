@@ -8,6 +8,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
+import { fonts } from '@/utils/fonts';
+
 type StatusBadgeProps = {
   label: string;
   type: 'loading' | 'success';
@@ -79,7 +81,7 @@ const styles = StyleSheet.create({
   },
   label: {
     color: '#64748b',
-    fontFamily: 'SpaceGrotesk_600SemiBold',
+    fontFamily: fonts.semiBold,
     fontSize: 11,
     letterSpacing: 0.8,
   },

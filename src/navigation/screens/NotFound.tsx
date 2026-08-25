@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { fonts } from '@/utils/fonts';
+
 export function NotFound() {
   return (
     <SafeAreaView style={styles.container}>
@@ -26,7 +28,7 @@ const styles = StyleSheet.create({
   },
   description: {
     color: '#64748b',
-    fontFamily: 'SpaceGrotesk_400Regular',
+    fontFamily: fonts.regular,
     fontSize: 14,
     lineHeight: 21,
     textAlign: 'center',

@@ -8,6 +8,7 @@ import {
   type HeavyLoadingStrategy,
   setHeavyLoadingStrategy,
 } from '@/features/heavy/heavyLoadingStrategy';
+import { fonts } from '@/utils/fonts';
 
 export function Home() {
   const [strategy, setStrategy] = useState<HeavyLoadingStrategy>(
@@ -62,24 +63,24 @@ const styles = StyleSheet.create({
   },
   infoDescription: {
     color: '#64748b',
-    fontFamily: 'SpaceGrotesk_400Regular',
+    fontFamily: fonts.regular,
     fontSize: 14,
     lineHeight: 21,
   },
   infoTitle: {
     color: '#002548',
-    fontFamily: 'SpaceGrotesk_600SemiBold',
+    fontFamily: fonts.semiBold,
     fontSize: 16,
   },
   subtitle: {
     color: '#475569',
-    fontFamily: 'SpaceGrotesk_400Regular',
+    fontFamily: fonts.regular,
     fontSize: 15,
     lineHeight: 22,
   },
   title: {
     color: '#002548',
-    fontFamily: 'SpaceGrotesk_700Bold',
+    fontFamily: fonts.bold,
     fontSize: 32,
     lineHeight: 38,
   },

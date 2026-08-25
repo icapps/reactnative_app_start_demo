@@ -10,6 +10,8 @@ import {
   View,
 } from 'react-native';
 
+import { fonts } from '@/utils/fonts';
+
 type Segment<T extends string> = {
   label: string;
   value: T;
@@ -131,7 +133,7 @@ const styles = StyleSheet.create({
   },
   segmentLabel: {
     color: '#64748b',
-    fontFamily: 'SpaceGrotesk_600SemiBold',
+    fontFamily: fonts.semiBold,
     fontSize: 13,
   },
   segmentLabelActive: {

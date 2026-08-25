@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { getHeavyModule } from '@/features/heavy/heavyModuleMap';
+import { fonts } from '@/utils/fonts';
 
 const HeavyModule = getHeavyModule('eager');
 
@@ -30,13 +31,13 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: '#475569',
-    fontFamily: 'SpaceGrotesk_400Regular',
+    fontFamily: fonts.regular,
     fontSize: 15,
     lineHeight: 22,
   },
   title: {
     color: '#002548',
-    fontFamily: 'SpaceGrotesk_700Bold',
+    fontFamily: fonts.bold,
     fontSize: 32,
     lineHeight: 38,
   },

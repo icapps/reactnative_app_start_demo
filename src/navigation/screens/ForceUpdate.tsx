@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
+import { fonts } from '@/utils/fonts';
+
 export function ForceUpdate() {
   return (
     <SafeAreaView style={styles.container}>
@@ -22,20 +24,20 @@ const styles = StyleSheet.create({
     backgroundColor: '#e7edf4',
     flex: 1,
     justifyContent: 'center',
-    padding: 24,
+    padding: 16,
   },
   content: {
-    gap: 16,
+    gap: 8,
   },
   description: {
     color: '#475569',
-    fontFamily: 'SpaceGrotesk_400Regular',
+    fontFamily: fonts.regular,
     fontSize: 16,
     lineHeight: 24,
   },
   eyebrow: {
     color: '#b42318',
-    fontFamily: 'SpaceGrotesk_600SemiBold',
+    fontFamily: fonts.semiBold,
     fontSize: 12,
     letterSpacing: 1.2,
   },
@@ -44,7 +46,7 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#002548',
-    fontFamily: 'SpaceGrotesk_700Bold',
+    fontFamily: fonts.bold,
     fontSize: 32,
     lineHeight: 38,
   },

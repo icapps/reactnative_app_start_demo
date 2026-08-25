@@ -4,6 +4,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { StatusBadge } from '@/components/StatusBadge';
 import { getHeavyModule } from '@/features/heavy/heavyModuleMap';
+import { fonts } from '@/utils/fonts';
 
 const LazyHeavyModule = getHeavyModule('lazy');
 
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
   },
   description: {
     color: '#64748b',
-    fontFamily: 'SpaceGrotesk_400Regular',
+    fontFamily: fonts.regular,
     fontSize: 14,
     lineHeight: 21,
   },
@@ -53,13 +54,13 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: '#475569',
-    fontFamily: 'SpaceGrotesk_400Regular',
+    fontFamily: fonts.regular,
     fontSize: 15,
     lineHeight: 22,
   },
   title: {
     color: '#002548',
-    fontFamily: 'SpaceGrotesk_700Bold',
+    fontFamily: fonts.bold,
     fontSize: 32,
     lineHeight: 38,
   },

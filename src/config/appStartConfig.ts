@@ -9,8 +9,8 @@ export const APP_START_CONFIG = {
         minMs: 300,
       },
       isEnabled: true,
-      minVersion: '2.0.0',
-      recommendedVersion: '1.5.0',
+      minVersion: '0.0.1',
+      recommendedVersion: '0.0.1',
     },
   },
 };

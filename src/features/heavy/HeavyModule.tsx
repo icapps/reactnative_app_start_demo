@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import { StatusBadge } from '@/components/StatusBadge';
+import { fonts } from '@/utils/fonts';
 import { log } from '@/utils/logger';
 
 import { INITIAL_HEAVY_LOADING_STRATEGY } from './heavyLoadingStrategy';
@@ -33,7 +34,7 @@ export function HeavyModule() {
 const styles = StyleSheet.create({
   description: {
     color: '#64748b',
-    fontFamily: 'SpaceGrotesk_400Regular',
+    fontFamily: fonts.regular,
     fontSize: 14,
     lineHeight: 21,
   },

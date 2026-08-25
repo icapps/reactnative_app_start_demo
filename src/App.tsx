@@ -1,9 +1,3 @@
-import {
-  SpaceGrotesk_400Regular,
-  SpaceGrotesk_600SemiBold,
-  SpaceGrotesk_700Bold,
-} from '@expo-google-fonts/space-grotesk';
-import { useFonts } from 'expo-font';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
@@ -18,16 +12,6 @@ SplashScreen.preventAutoHideAsync();
 
 export function App() {
   const [isNavigationReady, setIsNavigationReady] = useState(false);
-  const [hasLoadedFonts] = useFonts({
-    SpaceGrotesk_400Regular,
-    SpaceGrotesk_600SemiBold,
-    SpaceGrotesk_700Bold,
-  });
-
-  if (!hasLoadedFonts) {
-    // Async font loading only occurs in development
-    return null;
-  }
 
   return (
     <AppConfigProvider>

@@ -26,7 +26,16 @@
           "image": "./src/assets/images/icon.png"
         }
       ],
-      "expo-font",
+      [
+        "expo-font",
+        {
+          "fonts": [
+            "./src/assets/fonts/SpaceGrotesk_400Regular.ttf",
+            "./src/assets/fonts/SpaceGrotesk_600SemiBold.ttf",
+            "./src/assets/fonts/SpaceGrotesk_700Bold.ttf"
+          ]
+        }
+      ],
       "expo-status-bar"
     ]
   }
