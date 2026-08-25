@@ -5,7 +5,7 @@ export type HeavyLoadingStrategy = 'eager' | 'lazy';
 
 const STRATEGY_KEY = 'heavyLoadingStrategy';
 const DEFAULT_STRATEGY: HeavyLoadingStrategy =
-  APP_START_CONFIG.heavyLoading.defaultStrategy;
+  APP_START_CONFIG.moduleEvaluation.heavy.defaultStrategy;
 
 function isHeavyLoadingStrategy(
   value: string | undefined,

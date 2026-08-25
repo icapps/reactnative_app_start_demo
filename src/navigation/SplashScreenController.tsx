@@ -1,7 +1,7 @@
 import * as SplashScreen from 'expo-splash-screen';
 import { use, useEffect } from 'react';
 
-import { RootNavigationStackContext } from './NavigationStackProvider';
+import { RootNavigationStackContext } from './RootNavigationStackProvider';
 
 type SplashScreenControllerProps = {
   isNavigationReady: boolean;

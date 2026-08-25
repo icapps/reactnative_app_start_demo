@@ -1,16 +1,30 @@
 export const APP_START_CONFIG = {
-  heavyLoading: {
-    defaultStrategy: 'eager' as const,
+  moduleEvaluation: {
+    heavy: {
+      defaultStrategy: 'eager' as const,
+    },
   },
   startup: {
-    versionCheck: {
+    maintenance: {
       delayRangeMs: {
-        maxMs: 3_000,
+        maxMs: 1_500,
         minMs: 300,
       },
-      isEnabled: true,
+      isActive: false,
+    },
+    security: {
+      delayRangeMs: {
+        maxMs: 2_000,
+        minMs: 500,
+      },
+      isCompromised: false,
+    },
+    versionCheck: {
+      delayRangeMs: {
+        maxMs: 1_500,
+        minMs: 300,
+      },
       minVersion: '0.0.1',
-      recommendedVersion: '0.0.1',
     },
   },
 };

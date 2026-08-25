@@ -1,20 +1,23 @@
 import { createContext, type ReactNode } from 'react';
 
-import { type NavigationStack, useNavigationStack } from './useNavigationStack';
+import {
+  type RootNavigationStack,
+  useRootNavigationStack,
+} from './useRootNavigationStack';
 
-type NavigationStackContextValue = {
-  current: NavigationStack;
+type RootNavigationStackContextValue = {
+  current: RootNavigationStack;
 };
 
 export const RootNavigationStackContext =
-  createContext<NavigationStackContextValue>({ current: 'Loading' });
+  createContext<RootNavigationStackContextValue>({ current: 'Loading' });
 
 export function RootNavigationStackProvider({
   children,
 }: {
   children: ReactNode;
 }) {
-  const current = useNavigationStack();
+  const current = useRootNavigationStack();
 
   return (
     <RootNavigationStackContext.Provider value={{ current }}>

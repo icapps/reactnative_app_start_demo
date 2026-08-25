@@ -10,12 +10,14 @@ import { StyleSheet, Text } from 'react-native';
 import { INITIAL_HEAVY_LOADING_STRATEGY } from '@/features/heavy/heavyLoadingStrategy';
 import { fonts } from '@/utils/fonts';
 
-import { RootNavigationStackContext } from './NavigationStackProvider';
+import { RootNavigationStackContext } from './RootNavigationStackProvider';
+import { DeviceCompromised } from './screens/DeviceCompromised';
 import { ForceUpdate } from './screens/ForceUpdate';
 import { Home } from './screens/Home';
 import { Loading } from './screens/Loading';
+import { Maintenance } from './screens/Maintenance';
 import { NotFound } from './screens/NotFound';
-import type { useNavigationStack } from './useNavigationStack';
+import type { useRootNavigationStack } from './useRootNavigationStack';
 
 const HeavyScreen =
   INITIAL_HEAVY_LOADING_STRATEGY === 'eager'
@@ -95,7 +97,7 @@ const MainStack = createBottomTabNavigator({
   },
 });
 
-function whenStack(stack: ReturnType<typeof useNavigationStack>) {
+function whenStack(stack: ReturnType<typeof useRootNavigationStack>) {
   return () => use(RootNavigationStackContext).current === stack;
 }
 
@@ -104,6 +106,13 @@ const RootStack = createNativeStackNavigator({
     contentStyle: styles.scene,
   },
   screens: {
+    DeviceCompromised: {
+      if: whenStack('DeviceCompromised'),
+      options: {
+        headerShown: false,
+      },
+      screen: DeviceCompromised,
+    },
     ForceUpdate: {
       if: whenStack('ForceUpdate'),
       options: {
@@ -124,6 +133,13 @@ const RootStack = createNativeStackNavigator({
         headerShown: false,
       },
       screen: MainStack,
+    },
+    Maintenance: {
+      if: whenStack('Maintenance'),
+      options: {
+        headerShown: false,
+      },
+      screen: Maintenance,
     },
     NotFound: {
       linking: {

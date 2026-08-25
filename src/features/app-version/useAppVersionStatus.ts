@@ -8,7 +8,6 @@ import { compareSemver } from './compareSemver';
 export const AppVersionStatus = {
   LOADING: 'Loading',
   UP_TO_DATE: 'UpToDate',
-  UPDATE_RECOMMENDED: 'UpdateRecommended',
   UPDATE_REQUIRED: 'UpdateRequired',
 } as const;
 
@@ -25,18 +24,8 @@ export function useAppVersionStatus(): AppVersionStatus {
     return AppVersionStatus.LOADING;
   }
 
-  if (
-    appConfig.isEnabled &&
-    compareSemver(currentAppVersion, appConfig.minVersion) < 0
-  ) {
+  if (compareSemver(currentAppVersion, appConfig.minVersion) < 0) {
     return AppVersionStatus.UPDATE_REQUIRED;
-  }
-
-  if (
-    appConfig.isEnabled &&
-    compareSemver(currentAppVersion, appConfig.recommendedVersion) < 0
-  ) {
-    return AppVersionStatus.UPDATE_RECOMMENDED;
   }
 
   return AppVersionStatus.UP_TO_DATE;
