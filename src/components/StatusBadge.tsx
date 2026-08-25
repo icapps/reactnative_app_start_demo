@@ -8,10 +8,10 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-interface StatusBadgeProps {
+type StatusBadgeProps = {
   label: string;
   type: 'loading' | 'success';
-}
+};
 
 export function StatusBadge({ label, type }: StatusBadgeProps) {
   const dotOpacity = useSharedValue(1);

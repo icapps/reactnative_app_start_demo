@@ -3,12 +3,11 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { SegmentedControl } from '@/components/SegmentedControl';
-
 import {
   getHeavyLoadingStrategy,
   type HeavyLoadingStrategy,
   setHeavyLoadingStrategy,
-} from '../../config/heavyLoadingStrategy';
+} from '@/features/heavy/heavyLoadingStrategy';
 
 export function Home() {
   const [strategy, setStrategy] = useState<HeavyLoadingStrategy>(

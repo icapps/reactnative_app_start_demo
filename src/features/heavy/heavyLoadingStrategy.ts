@@ -1,9 +1,11 @@
+import { APP_START_CONFIG } from '@/config/appStartConfig';
 import { storage } from '@/utils/storage';
 
 export type HeavyLoadingStrategy = 'eager' | 'lazy';
 
 const STRATEGY_KEY = 'heavyLoadingStrategy';
-const DEFAULT_STRATEGY: HeavyLoadingStrategy = 'eager';
+const DEFAULT_STRATEGY: HeavyLoadingStrategy =
+  APP_START_CONFIG.heavyLoading.defaultStrategy;
 
 function isHeavyLoadingStrategy(
   value: string | undefined,

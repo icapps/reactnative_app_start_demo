@@ -10,16 +10,16 @@ import {
   View,
 } from 'react-native';
 
-interface Segment<T extends string> {
+type Segment<T extends string> = {
   label: string;
   value: T;
-}
+};
 
-interface SegmentedControlProps<T extends string> {
+type SegmentedControlProps<T extends string> = {
   onChange: (value: T) => void;
   segments: readonly Segment<T>[];
   value: T;
-}
+};
 
 export function SegmentedControl<T extends string>({
   onChange,

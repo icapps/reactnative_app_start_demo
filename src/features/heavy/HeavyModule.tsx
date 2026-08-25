@@ -1,8 +1,9 @@
 import { StyleSheet, Text, View } from 'react-native';
 
 import { StatusBadge } from '@/components/StatusBadge';
-import { INITIAL_HEAVY_LOADING_STRATEGY } from '@/config/heavyLoadingStrategy';
 import { log } from '@/utils/logger';
+
+import { INITIAL_HEAVY_LOADING_STRATEGY } from './heavyLoadingStrategy';
 
 log('Heavy', 'Module evaluation started');
 const startedAt = Date.now();

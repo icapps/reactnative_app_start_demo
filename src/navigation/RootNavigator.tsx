@@ -4,11 +4,17 @@ import {
   type StaticParamList,
 } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { use } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
-import { INITIAL_HEAVY_LOADING_STRATEGY } from '../config/heavyLoadingStrategy';
+import { INITIAL_HEAVY_LOADING_STRATEGY } from '@/features/heavy/heavyLoadingStrategy';
+
+import { RootNavigationStackContext } from './NavigationStackProvider';
+import { ForceUpdate } from './screens/ForceUpdate';
 import { Home } from './screens/Home';
+import { Loading } from './screens/Loading';
 import { NotFound } from './screens/NotFound';
+import type { useNavigationStack } from './useNavigationStack';
 
 const HeavyScreen =
   INITIAL_HEAVY_LOADING_STRATEGY === 'eager'
@@ -75,12 +81,31 @@ const MainStack = createBottomTabNavigator({
   },
 });
 
+function whenStack(stack: ReturnType<typeof useNavigationStack>) {
+  return () => use(RootNavigationStackContext).current === stack;
+}
+
 const RootStack = createNativeStackNavigator({
   screenOptions: {
     contentStyle: styles.scene,
   },
   screens: {
+    ForceUpdate: {
+      if: whenStack('ForceUpdate'),
+      options: {
+        headerShown: false,
+      },
+      screen: ForceUpdate,
+    },
+    Loading: {
+      if: whenStack('Loading'),
+      options: {
+        headerShown: false,
+      },
+      screen: Loading,
+    },
     MainStack: {
+      if: whenStack('Main'),
       options: {
         headerShown: false,
       },
