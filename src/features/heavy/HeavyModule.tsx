@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 
-import { StatusBadge } from '@/components/StatusBadge';
-import { fonts } from '@/utils/fonts';
-import { log } from '@/utils/logger';
+import { StatusBadge } from '@/shared/components/StatusBadge';
+import { fonts } from '@/shared/utils/fonts';
+import { log } from '@/shared/utils/logger';
 
 import { INITIAL_HEAVY_LOADING_STRATEGY } from './heavyLoadingStrategy';
 

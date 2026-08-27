@@ -1,14 +1,15 @@
+import * as Sentry from '@sentry/react-native';
 import { useState } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Button, StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { SegmentedControl } from '@/components/SegmentedControl';
 import {
   getHeavyLoadingStrategy,
   type HeavyLoadingStrategy,
   setHeavyLoadingStrategy,
 } from '@/features/heavy/heavyLoadingStrategy';
-import { fonts } from '@/utils/fonts';
+import { SegmentedControl } from '@/shared/components/SegmentedControl';
+import { fonts } from '@/shared/utils/fonts';
 
 export function Home() {
   const [strategy, setStrategy] = useState<HeavyLoadingStrategy>(

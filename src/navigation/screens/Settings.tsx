@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import { getHeavyModule } from '@/features/heavy/heavyModuleMap';
-import { fonts } from '@/utils/fonts';
+import { fonts } from '@/shared/utils/fonts';
 
 const HeavyModule = getHeavyModule('eager');
 

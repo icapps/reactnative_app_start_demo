@@ -1,5 +1,5 @@
-import { APP_START_CONFIG } from '@/config/appStartConfig';
-import { storage } from '@/utils/storage';
+import { APP_START_CONFIG } from '@/config/appStart';
+import { storage } from '@/shared/utils/storage';
 
 export type HeavyLoadingStrategy = 'eager' | 'lazy';
 

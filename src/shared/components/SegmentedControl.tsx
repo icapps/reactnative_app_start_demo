@@ -10,7 +10,7 @@ import {
   View,
 } from 'react-native';
 
-import { fonts } from '@/utils/fonts';
+import { fonts } from '@/shared/utils/fonts';
 
 type Segment<T extends string> = {
   label: string;

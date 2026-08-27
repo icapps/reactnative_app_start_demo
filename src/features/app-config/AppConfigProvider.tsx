@@ -1,6 +1,6 @@
 import { createContext, type ReactNode } from 'react';
 
-import { APP_START_CONFIG } from '@/config/appStartConfig';
+import { APP_START_CONFIG } from '@/config/appStart';
 
 import { useAppConfig } from './useAppConfig';
 

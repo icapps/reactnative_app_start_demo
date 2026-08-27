@@ -8,7 +8,7 @@ import { use } from 'react';
 import { StyleSheet, Text } from 'react-native';
 
 import { INITIAL_HEAVY_LOADING_STRATEGY } from '@/features/heavy/heavyLoadingStrategy';
-import { fonts } from '@/utils/fonts';
+import { fonts } from '@/shared/utils/fonts';
 
 import { RootNavigationStackContext } from './RootNavigationStackProvider';
 import { DeviceCompromised } from './screens/DeviceCompromised';

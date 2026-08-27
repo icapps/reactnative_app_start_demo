@@ -1,7 +1,7 @@
 import * as SplashScreen from 'expo-splash-screen';
-import { use, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { RootNavigationStackContext } from './RootNavigationStackProvider';
+import { useStartupCompletion } from './useStartupCompletion';
 
 type SplashScreenControllerProps = {
   isNavigationReady: boolean;
@@ -10,13 +10,14 @@ type SplashScreenControllerProps = {
 export function SplashScreenController({
   isNavigationReady,
 }: SplashScreenControllerProps) {
-  const { current } = use(RootNavigationStackContext);
+  const { isComplete: isStartupComplete } =
+    useStartupCompletion(isNavigationReady);
 
   useEffect(() => {
-    if (isNavigationReady && current !== 'Loading') {
+    if (isStartupComplete) {
       SplashScreen.hideAsync();
     }
-  }, [current, isNavigationReady]);
+  }, [isStartupComplete]);
 
   return null;
 }

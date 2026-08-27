@@ -2,9 +2,9 @@ import { Suspense } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 
-import { StatusBadge } from '@/components/StatusBadge';
 import { getHeavyModule } from '@/features/heavy/heavyModuleMap';
-import { fonts } from '@/utils/fonts';
+import { StatusBadge } from '@/shared/components/StatusBadge';
+import { fonts } from '@/shared/utils/fonts';
 
 const LazyHeavyModule = getHeavyModule('lazy');
 

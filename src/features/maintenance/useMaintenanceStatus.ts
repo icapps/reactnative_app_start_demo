@@ -1,5 +1,6 @@
-import { APP_START_CONFIG } from '@/config/appStartConfig';
+import { APP_START_CONFIG } from '@/config/appStart';
 import { useRandomDelay } from '@/shared/hooks/useRandomDelay';
+import { recordStartupStep } from '@/shared/utils/startupTelemetry';
 
 export const MaintenanceStatus = {
   ACTIVE: 'Active',
@@ -11,11 +12,13 @@ export type MaintenanceStatus =
   (typeof MaintenanceStatus)[keyof typeof MaintenanceStatus];
 
 export function useMaintenanceStatus(): MaintenanceStatus {
-  const { isReady } = useRandomDelay(
-    APP_START_CONFIG.startup.maintenance.delayRangeMs,
-  );
+  const { isComplete } = useRandomDelay({
+    ...APP_START_CONFIG.startup.maintenance.delayRangeMs,
+    onComplete: () => recordStartupStep('maintenance', 'resolved'),
+    onStart: () => recordStartupStep('maintenance', 'started'),
+  });
 
-  if (!isReady) {
+  if (!isComplete) {
     return MaintenanceStatus.LOADING;
   }
 

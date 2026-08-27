@@ -8,7 +8,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 
-import { fonts } from '@/utils/fonts';
+import { fonts } from '@/shared/utils/fonts';
 
 type StatusBadgeProps = {
   label: string;
@@ -26,7 +26,6 @@ export function StatusBadge({ label, type }: StatusBadgeProps) {
       return;
     }
 
-    // Runs on the UI thread, so it keeps pulsing even if the JS thread is busy
     dotOpacity.value = withRepeat(
       withTiming(0.35, { duration: 900 }),
       -1,

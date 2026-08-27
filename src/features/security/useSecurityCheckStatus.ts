@@ -1,5 +1,6 @@
-import { APP_START_CONFIG } from '@/config/appStartConfig';
+import { APP_START_CONFIG } from '@/config/appStart';
 import { useRandomDelay } from '@/shared/hooks/useRandomDelay';
+import { recordStartupStep } from '@/shared/utils/startupTelemetry';
 
 export const SecurityCheckStatus = {
   COMPROMISED: 'Compromised',
@@ -11,11 +12,13 @@ export type SecurityCheckStatus =
   (typeof SecurityCheckStatus)[keyof typeof SecurityCheckStatus];
 
 export function useSecurityCheckStatus(): SecurityCheckStatus {
-  const { isReady } = useRandomDelay(
-    APP_START_CONFIG.startup.security.delayRangeMs,
-  );
+  const { isComplete } = useRandomDelay({
+    ...APP_START_CONFIG.startup.security.delayRangeMs,
+    onComplete: () => recordStartupStep('security', 'resolved'),
+    onStart: () => recordStartupStep('security', 'started'),
+  });
 
-  if (!isReady) {
+  if (!isComplete) {
     return SecurityCheckStatus.LOADING;
   }
 
