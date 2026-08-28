@@ -104,49 +104,32 @@ function whenStack(stack: ReturnType<typeof useRootNavigationStack>) {
 const RootStack = createNativeStackNavigator({
   screenOptions: {
     contentStyle: styles.scene,
+    headerShown: false,
   },
   screens: {
     DeviceCompromised: {
       if: whenStack('DeviceCompromised'),
-      options: {
-        headerShown: false,
-      },
       screen: DeviceCompromised,
     },
     ForceUpdate: {
       if: whenStack('ForceUpdate'),
-      options: {
-        headerShown: false,
-      },
       screen: ForceUpdate,
     },
     Loading: {
       if: whenStack('Loading'),
-      options: {
-        headerShown: false,
-      },
       screen: Loading,
     },
     MainStack: {
       if: whenStack('Main'),
-      options: {
-        headerShown: false,
-      },
       screen: MainStack,
     },
     Maintenance: {
       if: whenStack('Maintenance'),
-      options: {
-        headerShown: false,
-      },
       screen: Maintenance,
     },
     NotFound: {
       linking: {
         path: '*',
-      },
-      options: {
-        headerShown: false,
       },
       screen: NotFound,
     },

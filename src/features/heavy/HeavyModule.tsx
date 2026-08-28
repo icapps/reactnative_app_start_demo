@@ -6,10 +6,10 @@ import { log } from '@/shared/utils/logger';
 
 import { INITIAL_HEAVY_LOADING_STRATEGY } from './heavyLoadingStrategy';
 
-log('Heavy', 'Module evaluation started');
+log('heavy', 'module evaluation started');
 const startedAt = Date.now();
 while (Date.now() - startedAt < 10000) {}
-log('Heavy', 'Module evaluation finished');
+log('heavy', 'module evaluation finished');
 
 export function HeavyModule() {
   return (

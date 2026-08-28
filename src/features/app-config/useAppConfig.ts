@@ -5,8 +5,8 @@ import { recordStartupStep } from '@/shared/utils/startupTelemetry';
 export function useAppConfig() {
   const { isComplete } = useRandomDelay({
     ...APP_START_CONFIG.startup.versionCheck.delayRangeMs,
-    onComplete: () => recordStartupStep('app-config', 'resolved'),
-    onStart: () => recordStartupStep('app-config', 'started'),
+    onComplete: () => recordStartupStep('app_config', 'resolved'),
+    onStart: () => recordStartupStep('app_config', 'started'),
   });
 
   return {

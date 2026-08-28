@@ -1,8 +1,7 @@
+import type { Span } from '@sentry/react-native';
 import * as Sentry from '@sentry/react-native';
 
 import { log } from '@/shared/utils/logger';
-
-const startedAt = Date.now();
 
 type StartupStepPhase = 'started' | 'resolved';
 
@@ -12,7 +11,26 @@ type StartupStep = {
   phase: StartupStepPhase;
 };
 
+const startedAt = Date.now();
+
+let appStartupSpan: Span | undefined;
+
 const steps: StartupStep[] = [];
+const stepSpans = new Map<string, Span>();
+
+function getAppStartupSpan() {
+  appStartupSpan ??= Sentry.startInactiveSpan({
+    forceTransaction: true,
+    name: 'AppStartup',
+    op: 'app.startup',
+  });
+
+  return appStartupSpan;
+}
+
+export function startAppStartupSpan() {
+  return getAppStartupSpan();
+}
 
 export function recordStartupStep(name: string, phase: StartupStepPhase) {
   const step = {
@@ -24,12 +42,23 @@ export function recordStartupStep(name: string, phase: StartupStepPhase) {
   steps.push(step);
 
   log('startup', `${name} ${phase} at +${step.atMs}ms`);
-  Sentry.addBreadcrumb({
-    category: 'app-start',
-    data: step,
-    level: 'info',
-    message: `${name} ${phase}`,
-  });
+
+  if (phase === 'started') {
+    const span = Sentry.startInactiveSpan({
+      name,
+      op: 'app.startup.check',
+      parentSpan: getAppStartupSpan(),
+    });
+
+    stepSpans.set(name, span);
+    return;
+  }
+
+  const stepSpan = stepSpans.get(name);
+  if (stepSpan) {
+    stepSpan.end();
+    stepSpans.delete(name);
+  }
 }
 
 export function recordStartupComplete(destination: string) {
@@ -42,22 +71,12 @@ export function recordStartupComplete(destination: string) {
     'startup',
     `startup complete at +${elapsedMs}ms, destination=${destination}, resolution order=${resolutionOrder.join(' > ')}`,
   );
-  Sentry.addBreadcrumb({
-    category: 'app-start',
-    data: {
-      destination,
-      elapsedMs,
-      resolutionOrder,
-    },
-    level: 'info',
-    message: 'startup complete',
+
+  const span = getAppStartupSpan();
+  span.setAttributes({
+    'startup.destination': destination,
+    'startup.resolution_order': resolutionOrder.join(' > '),
   });
-  Sentry.captureMessage('startup complete', {
-    extra: {
-      destination,
-      elapsedMs,
-      resolutionOrder,
-    },
-    level: 'info',
-  });
+
+  span.end();
 }

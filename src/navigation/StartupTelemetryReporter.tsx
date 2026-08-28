@@ -1,4 +1,3 @@
-import * as Sentry from '@sentry/react-native';
 import { useEffect, useRef } from 'react';
 
 import { recordStartupComplete } from '@/shared/utils/startupTelemetry';
@@ -20,7 +19,6 @@ export function StartupTelemetryReporter({
     if (isStartupComplete && !hasReported.current) {
       hasReported.current = true;
       recordStartupComplete(currentScreen);
-      Sentry.reportFullyDisplayed();
     }
   }, [currentScreen, isStartupComplete]);
 
