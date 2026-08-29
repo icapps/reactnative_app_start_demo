@@ -5,14 +5,13 @@ import { RemoteConfigContext } from '@/features/remote-config/RemoteConfigProvid
 import { useSimulatedStartupCheck } from '@/shared/hooks/useSimulatedStartupCheck';
 import { recordStartupStep } from '@/shared/utils/startupTelemetry';
 
-export const SecurityStatus = {
-  COMPROMISED: 'Compromised',
-  LOADING: 'Loading',
-  PASSED: 'Passed',
-} as const;
+export {
+  resolveSecurityStatus,
+  SecurityStatus,
+} from './resolveSecurityStatus';
 
-export type SecurityStatus =
-  (typeof SecurityStatus)[keyof typeof SecurityStatus];
+import type { SecurityStatus } from './resolveSecurityStatus';
+import { resolveSecurityStatus } from './resolveSecurityStatus';
 
 export function useSecurityStatus(): SecurityStatus {
   const { config: remoteConfig, isReady: isRemoteConfigReady } =
@@ -25,19 +24,10 @@ export function useSecurityStatus(): SecurityStatus {
     onStart: () => recordStartupStep('Security', 'started'),
   });
 
-  if (!isRemoteConfigReady) {
-    return SecurityStatus.LOADING;
-  }
-
-  if (!remoteConfig.securityPolicy.isRequired) {
-    return SecurityStatus.PASSED;
-  }
-
-  if (!isComplete) {
-    return SecurityStatus.LOADING;
-  }
-
-  return APP_START_CONFIG.startup.security.isCompromised
-    ? SecurityStatus.COMPROMISED
-    : SecurityStatus.PASSED;
+  return resolveSecurityStatus({
+    isComplete,
+    isCompromised: APP_START_CONFIG.startup.security.isCompromised,
+    isRemoteConfigReady,
+    isSecurityRequired: remoteConfig.securityPolicy.isRequired,
+  });
 }

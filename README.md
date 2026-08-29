@@ -53,3 +53,4 @@ A practical React Native (Expo) demo focused on building fast, observable app st
 - Run `npm run biome:check` to catch syntax and formatting issues.
 - Use `npm run biome:fix` to format the codebase and resolve auto-fixable errors.
 - `npm run ts:check` runs a strict type check across the project.
+- Run `npm test` to execute the Jest test suite.

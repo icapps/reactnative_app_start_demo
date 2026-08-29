@@ -8,11 +8,11 @@ import { AppVersionStatusProvider } from '@/features/app-version/AppVersionStatu
 import { MaintenanceStatusProvider } from '@/features/maintenance/MaintenanceStatusProvider';
 import { RemoteConfigProvider } from '@/features/remote-config/RemoteConfigProvider';
 import { SecurityStatusProvider } from '@/features/security/SecurityStatusProvider';
-import { RootNavigationStackProvider } from '@/navigation/RootNavigationStackProvider';
 import type { RootStackParamList } from '@/navigation/RootNavigator';
 import { RootNavigator } from '@/navigation/RootNavigator';
-import { SplashScreenController } from '@/navigation/SplashScreenController';
-import { StartupTelemetryReporter } from '@/navigation/StartupTelemetryReporter';
+import { RootNavigationStackProvider } from '@/navigation/startup/RootNavigationStackProvider';
+import { SplashScreenController } from '@/navigation/startup/SplashScreenController';
+import { StartupTelemetryReporter } from '@/navigation/startup/StartupTelemetryReporter';
 
 SplashScreen.preventAutoHideAsync();
 

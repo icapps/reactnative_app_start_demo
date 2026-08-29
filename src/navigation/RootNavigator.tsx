@@ -10,14 +10,14 @@ import { StyleSheet, Text } from 'react-native';
 import { INITIAL_HEAVY_LOADING_STRATEGY } from '@/features/heavy/heavyLoadingStrategy';
 import { fonts } from '@/shared/utils/fonts';
 
-import { RootNavigationStackContext } from './RootNavigationStackProvider';
 import { DeviceCompromised } from './screens/DeviceCompromised';
 import { ForceUpdate } from './screens/ForceUpdate';
 import { Home } from './screens/Home';
 import { Loading } from './screens/Loading';
 import { Maintenance } from './screens/Maintenance';
 import { NotFound } from './screens/NotFound';
-import type { useRootNavigationStack } from './useRootNavigationStack';
+import { RootNavigationStackContext } from './startup/RootNavigationStackProvider';
+import type { useRootNavigationStack } from './startup/useRootNavigationStack';
 
 const HeavyScreen =
   INITIAL_HEAVY_LOADING_STRATEGY === 'eager'

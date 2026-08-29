@@ -2,14 +2,13 @@ import { APP_START_CONFIG } from '@/config/appStart';
 import { useSimulatedStartupCheck } from '@/shared/hooks/useSimulatedStartupCheck';
 import { recordStartupStep } from '@/shared/utils/startupTelemetry';
 
-export const MaintenanceStatus = {
-  ACTIVE: 'Active',
-  INACTIVE: 'Inactive',
-  LOADING: 'Loading',
-} as const;
+export {
+  MaintenanceStatus,
+  resolveMaintenanceStatus,
+} from './resolveMaintenanceStatus';
 
-export type MaintenanceStatus =
-  (typeof MaintenanceStatus)[keyof typeof MaintenanceStatus];
+import type { MaintenanceStatus } from './resolveMaintenanceStatus';
+import { resolveMaintenanceStatus } from './resolveMaintenanceStatus';
 
 export function useMaintenanceStatus(): MaintenanceStatus {
   const { isComplete } = useSimulatedStartupCheck({
@@ -18,11 +17,8 @@ export function useMaintenanceStatus(): MaintenanceStatus {
     onStart: () => recordStartupStep('Maintenance', 'started'),
   });
 
-  if (!isComplete) {
-    return MaintenanceStatus.LOADING;
-  }
-
-  return APP_START_CONFIG.startup.maintenance.isActive
-    ? MaintenanceStatus.ACTIVE
-    : MaintenanceStatus.INACTIVE;
+  return resolveMaintenanceStatus({
+    isActive: APP_START_CONFIG.startup.maintenance.isActive,
+    isComplete,
+  });
 }

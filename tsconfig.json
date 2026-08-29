@@ -5,6 +5,7 @@
     "strict": true,
     "jsx": "react-jsx",
     "moduleResolution": "bundler",
+    "types": ["jest"],
     "paths": {
       "@/*": [
         "./src/*"
