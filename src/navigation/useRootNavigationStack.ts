@@ -4,8 +4,8 @@ import { AppVersionStatusContext } from '@/features/app-version/AppVersionStatus
 import { AppVersionStatus } from '@/features/app-version/useAppVersionStatus';
 import { MaintenanceStatusContext } from '@/features/maintenance/MaintenanceStatusProvider';
 import { MaintenanceStatus } from '@/features/maintenance/useMaintenanceStatus';
-import { SecurityCheckStatusContext } from '@/features/security/SecurityCheckStatusProvider';
-import { SecurityCheckStatus } from '@/features/security/useSecurityCheckStatus';
+import { SecurityStatusContext } from '@/features/security/SecurityStatusProvider';
+import { SecurityStatus } from '@/features/security/useSecurityStatus';
 
 export type RootNavigationStack =
   | 'Loading'
@@ -17,12 +17,12 @@ export type RootNavigationStack =
 export function useRootNavigationStack(): RootNavigationStack {
   const { status: appVersionStatus } = use(AppVersionStatusContext);
   const { status: maintenanceStatus } = use(MaintenanceStatusContext);
-  const { status: securityCheckStatus } = use(SecurityCheckStatusContext);
+  const { status: securityStatus } = use(SecurityStatusContext);
 
   if (
     appVersionStatus === AppVersionStatus.LOADING ||
     maintenanceStatus === MaintenanceStatus.LOADING ||
-    securityCheckStatus === SecurityCheckStatus.LOADING
+    securityStatus === SecurityStatus.LOADING
   ) {
     return 'Loading';
   }
@@ -35,7 +35,7 @@ export function useRootNavigationStack(): RootNavigationStack {
     return 'Maintenance';
   }
 
-  if (securityCheckStatus === SecurityCheckStatus.COMPROMISED) {
+  if (securityStatus === SecurityStatus.COMPROMISED) {
     return 'DeviceCompromised';
   }
 

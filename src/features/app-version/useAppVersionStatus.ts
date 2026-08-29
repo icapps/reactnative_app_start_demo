@@ -1,7 +1,7 @@
 import * as Application from 'expo-application';
 import { use } from 'react';
 
-import { AppConfigContext } from '@/features/app-config/AppConfigProvider';
+import { RemoteConfigContext } from '@/features/remote-config/RemoteConfigProvider';
 
 import { compareSemver } from './compareSemver';
 
@@ -15,16 +15,16 @@ export type AppVersionStatus =
   (typeof AppVersionStatus)[keyof typeof AppVersionStatus];
 
 export function useAppVersionStatus(): AppVersionStatus {
-  const { config: appConfig, isReady: isAppConfigReady } =
-    use(AppConfigContext);
+  const { config: remoteConfig, isReady: isRemoteConfigReady } =
+    use(RemoteConfigContext);
 
   const currentAppVersion = Application.nativeApplicationVersion ?? '0.0.0';
 
-  if (!isAppConfigReady) {
+  if (!isRemoteConfigReady) {
     return AppVersionStatus.LOADING;
   }
 
-  if (compareSemver(currentAppVersion, appConfig.minVersion) < 0) {
+  if (compareSemver(currentAppVersion, remoteConfig.minVersion) < 0) {
     return AppVersionStatus.UPDATE_REQUIRED;
   }
 

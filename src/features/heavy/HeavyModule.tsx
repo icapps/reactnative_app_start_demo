@@ -1,15 +1,19 @@
 import { StyleSheet, Text, View } from 'react-native';
 
+import { APP_START_CONFIG } from '@/config/appStart';
 import { StatusBadge } from '@/shared/components/StatusBadge';
 import { fonts } from '@/shared/utils/fonts';
 import { log } from '@/shared/utils/logger';
 
 import { INITIAL_HEAVY_LOADING_STRATEGY } from './heavyLoadingStrategy';
 
-log('heavy', 'module evaluation started');
+log('Heavy', 'Module evaluation started');
 const startedAt = Date.now();
-while (Date.now() - startedAt < 10000) {}
-log('heavy', 'module evaluation finished');
+while (
+  Date.now() - startedAt <
+  APP_START_CONFIG.moduleEvaluation.heavy.evaluationDurationMs
+) {}
+log('Heavy', 'Module evaluation finished');
 
 export function HeavyModule() {
   return (

@@ -2,29 +2,33 @@ export const APP_START_CONFIG = {
   moduleEvaluation: {
     heavy: {
       defaultStrategy: 'eager' as const,
+      evaluationDurationMs: 7_000,
     },
   },
   startup: {
     maintenance: {
       delayRangeMs: {
-        maxMs: 1_500,
-        minMs: 300,
+        maxMs: 600,
+        minMs: 250,
       },
       isActive: false,
     },
-    security: {
+    remoteConfig: {
       delayRangeMs: {
-        maxMs: 2_000,
-        minMs: 500,
-      },
-      isCompromised: false,
-    },
-    versionCheck: {
-      delayRangeMs: {
-        maxMs: 1_500,
-        minMs: 300,
+        maxMs: 800,
+        minMs: 400,
       },
       minVersion: '0.0.1',
+      securityPolicy: {
+        isRequired: true,
+      },
+    },
+    security: {
+      delayRangeMs: {
+        maxMs: 350,
+        minMs: 150,
+      },
+      isCompromised: false,
     },
   },
 };

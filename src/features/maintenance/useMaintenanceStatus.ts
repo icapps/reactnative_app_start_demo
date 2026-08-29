@@ -1,5 +1,5 @@
 import { APP_START_CONFIG } from '@/config/appStart';
-import { useRandomDelay } from '@/shared/hooks/useRandomDelay';
+import { useSimulatedStartupCheck } from '@/shared/hooks/useSimulatedStartupCheck';
 import { recordStartupStep } from '@/shared/utils/startupTelemetry';
 
 export const MaintenanceStatus = {
@@ -12,10 +12,10 @@ export type MaintenanceStatus =
   (typeof MaintenanceStatus)[keyof typeof MaintenanceStatus];
 
 export function useMaintenanceStatus(): MaintenanceStatus {
-  const { isComplete } = useRandomDelay({
+  const { isComplete } = useSimulatedStartupCheck({
     ...APP_START_CONFIG.startup.maintenance.delayRangeMs,
-    onComplete: () => recordStartupStep('maintenance', 'resolved'),
-    onStart: () => recordStartupStep('maintenance', 'started'),
+    onComplete: () => recordStartupStep('Maintenance', 'resolved'),
+    onStart: () => recordStartupStep('Maintenance', 'started'),
   });
 
   if (!isComplete) {

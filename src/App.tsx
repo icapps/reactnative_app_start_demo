@@ -4,10 +4,10 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 
 import { navigationIntegration } from '@/config/sentry';
-import { AppConfigProvider } from '@/features/app-config/AppConfigProvider';
 import { AppVersionStatusProvider } from '@/features/app-version/AppVersionStatusProvider';
 import { MaintenanceStatusProvider } from '@/features/maintenance/MaintenanceStatusProvider';
-import { SecurityCheckStatusProvider } from '@/features/security/SecurityCheckStatusProvider';
+import { RemoteConfigProvider } from '@/features/remote-config/RemoteConfigProvider';
+import { SecurityStatusProvider } from '@/features/security/SecurityStatusProvider';
 import { RootNavigationStackProvider } from '@/navigation/RootNavigationStackProvider';
 import type { RootStackParamList } from '@/navigation/RootNavigator';
 import { RootNavigator } from '@/navigation/RootNavigator';
@@ -26,10 +26,10 @@ export function App() {
   };
 
   return (
-    <AppConfigProvider>
+    <RemoteConfigProvider>
       <AppVersionStatusProvider>
         <MaintenanceStatusProvider>
-          <SecurityCheckStatusProvider>
+          <SecurityStatusProvider>
             <RootNavigationStackProvider>
               <StatusBar style="dark" />
               <SplashScreenController isNavigationReady={isNavigationReady} />
@@ -43,9 +43,9 @@ export function App() {
                 onReady={handleNavigationReady}
               />
             </RootNavigationStackProvider>
-          </SecurityCheckStatusProvider>
+          </SecurityStatusProvider>
         </MaintenanceStatusProvider>
       </AppVersionStatusProvider>
-    </AppConfigProvider>
+    </RemoteConfigProvider>
   );
 }

@@ -21,7 +21,7 @@ const stepSpans = new Map<string, Span>();
 function getAppStartupSpan() {
   appStartupSpan ??= Sentry.startInactiveSpan({
     forceTransaction: true,
-    name: 'AppStartup',
+    name: 'App Startup',
     op: 'app.startup',
   });
 
@@ -41,7 +41,7 @@ export function recordStartupStep(name: string, phase: StartupStepPhase) {
 
   steps.push(step);
 
-  log('startup', `${name} ${phase} at +${step.atMs}ms`);
+  log('Startup', `${name} ${phase} at +${step.atMs}ms`);
 
   if (phase === 'started') {
     const span = Sentry.startInactiveSpan({
@@ -68,8 +68,8 @@ export function recordStartupComplete(destination: string) {
     .map(({ name }) => name);
 
   log(
-    'startup',
-    `startup complete at +${elapsedMs}ms, destination=${destination}, resolution order=${resolutionOrder.join(' > ')}`,
+    'Startup',
+    `Startup complete at +${elapsedMs}ms, destination=${destination}, resolution order=${resolutionOrder.join(' > ')}`,
   );
 
   const span = getAppStartupSpan();
