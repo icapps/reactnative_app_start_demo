@@ -10,14 +10,16 @@ type SplashScreenControllerProps = {
 export function SplashScreenController({
   isNavigationReady,
 }: SplashScreenControllerProps) {
-  const { isComplete: isStartupComplete } =
+  const { isSettled: isStartupSettled } =
     useStartupCompletion(isNavigationReady);
 
   useEffect(() => {
-    if (isStartupComplete) {
-      SplashScreen.hideAsync();
+    if (!isStartupSettled) {
+      return;
     }
-  }, [isStartupComplete]);
+
+    SplashScreen.hideAsync();
+  }, [isStartupSettled]);
 
   return null;
 }

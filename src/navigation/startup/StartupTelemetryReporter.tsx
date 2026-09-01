@@ -11,16 +11,16 @@ type StartupTelemetryReporterProps = {
 export function StartupTelemetryReporter({
   isNavigationReady,
 }: StartupTelemetryReporterProps) {
-  const { currentScreen, isComplete: isStartupComplete } =
+  const { currentScreen, isSettled: isStartupSettled } =
     useStartupCompletion(isNavigationReady);
   const hasReported = useRef(false);
 
   useEffect(() => {
-    if (isStartupComplete && !hasReported.current) {
+    if (isStartupSettled && !hasReported.current) {
       hasReported.current = true;
       recordStartupComplete(currentScreen);
     }
-  }, [currentScreen, isStartupComplete]);
+  }, [currentScreen, isStartupSettled]);
 
   return null;
 }

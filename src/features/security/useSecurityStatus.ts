@@ -10,24 +10,29 @@ export {
   SecurityStatus,
 } from './resolveSecurityStatus';
 
-import type { SecurityStatus } from './resolveSecurityStatus';
 import { resolveSecurityStatus } from './resolveSecurityStatus';
 
-export function useSecurityStatus(): SecurityStatus {
-  const { config: remoteConfig, isReady: isRemoteConfigReady } =
+export function useSecurityStatus() {
+  const { config: remoteConfig, isSettled: isRemoteConfigSettled } =
     use(RemoteConfigContext);
 
-  const { isComplete } = useSimulatedStartupCheck({
-    isEnabled: isRemoteConfigReady && remoteConfig.securityPolicy.isRequired,
+  const { hasError, isSettled, retry } = useSimulatedStartupCheck({
+    isEnabled: isRemoteConfigSettled && remoteConfig.securityPolicy.isRequired,
     ...APP_START_CONFIG.startup.security.delayRangeMs,
-    onComplete: () => recordStartupStep('Security', 'resolved'),
+    onError: () => recordStartupStep('Security', 'error'),
     onStart: () => recordStartupStep('Security', 'started'),
+    onSuccess: () => recordStartupStep('Security', 'resolved'),
+    shouldFail: APP_START_CONFIG.startup.security.shouldFail,
   });
 
-  return resolveSecurityStatus({
-    isComplete,
-    isCompromised: APP_START_CONFIG.startup.security.isCompromised,
-    isRemoteConfigReady,
-    isSecurityRequired: remoteConfig.securityPolicy.isRequired,
-  });
+  return {
+    retry,
+    status: resolveSecurityStatus({
+      hasError,
+      isCompromised: APP_START_CONFIG.startup.security.isCompromised,
+      isRemoteConfigSettled,
+      isSecurityRequired: remoteConfig.securityPolicy.isRequired,
+      isSettled,
+    }),
+  };
 }

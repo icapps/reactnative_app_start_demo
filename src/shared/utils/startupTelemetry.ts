@@ -3,7 +3,7 @@ import * as Sentry from '@sentry/react-native';
 
 import { log } from '@/shared/utils/logger';
 
-type StartupStepPhase = 'started' | 'resolved';
+type StartupStepPhase = 'error' | 'resolved' | 'started';
 
 type StartupStep = {
   atMs: number;

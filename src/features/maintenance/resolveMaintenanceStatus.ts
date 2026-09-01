@@ -1,5 +1,6 @@
 export const MaintenanceStatus = {
   ACTIVE: 'Active',
+  ERROR: 'Error',
   INACTIVE: 'Inactive',
   LOADING: 'Loading',
 } as const;
@@ -8,16 +9,22 @@ export type MaintenanceStatus =
   (typeof MaintenanceStatus)[keyof typeof MaintenanceStatus];
 
 type MaintenanceStatusInput = {
-  isComplete: boolean;
   isActive: boolean;
+  hasError: boolean;
+  isSettled: boolean;
 };
 
 export function resolveMaintenanceStatus({
-  isComplete,
   isActive,
+  hasError,
+  isSettled,
 }: MaintenanceStatusInput): MaintenanceStatus {
-  if (!isComplete) {
+  if (!isSettled) {
     return MaintenanceStatus.LOADING;
+  }
+
+  if (hasError) {
+    return MaintenanceStatus.ERROR;
   }
 
   return isActive ? MaintenanceStatus.ACTIVE : MaintenanceStatus.INACTIVE;

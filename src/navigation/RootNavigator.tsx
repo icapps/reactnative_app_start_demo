@@ -16,6 +16,7 @@ import { Home } from './screens/Home';
 import { Loading } from './screens/Loading';
 import { Maintenance } from './screens/Maintenance';
 import { NotFound } from './screens/NotFound';
+import { StartupError } from './screens/StartupError';
 import { RootNavigationStackContext } from './startup/RootNavigationStackProvider';
 import type { useRootNavigationStack } from './startup/useRootNavigationStack';
 
@@ -106,6 +107,7 @@ const RootStack = createNativeStackNavigator({
     contentStyle: styles.scene,
     headerShown: false,
   },
+  // biome-ignore assist/source/useSortedKeys: NotFound must stay last so it isn't picked as the fallback when the active screen changes
   screens: {
     DeviceCompromised: {
       if: whenStack('DeviceCompromised'),
@@ -126,6 +128,10 @@ const RootStack = createNativeStackNavigator({
     Maintenance: {
       if: whenStack('Maintenance'),
       screen: Maintenance,
+    },
+    StartupError: {
+      if: whenStack('StartupError'),
+      screen: StartupError,
     },
     NotFound: {
       linking: {

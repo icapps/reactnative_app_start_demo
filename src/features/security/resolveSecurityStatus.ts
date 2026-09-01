@@ -1,5 +1,6 @@
 export const SecurityStatus = {
   COMPROMISED: 'Compromised',
+  ERROR: 'Error',
   LOADING: 'Loading',
   PASSED: 'Passed',
 } as const;
@@ -8,19 +9,21 @@ export type SecurityStatus =
   (typeof SecurityStatus)[keyof typeof SecurityStatus];
 
 type SecurityStatusInput = {
-  isRemoteConfigReady: boolean;
+  isRemoteConfigSettled: boolean;
   isSecurityRequired: boolean;
-  isComplete: boolean;
   isCompromised: boolean;
+  hasError: boolean;
+  isSettled: boolean;
 };
 
 export function resolveSecurityStatus({
-  isRemoteConfigReady,
+  isRemoteConfigSettled,
   isSecurityRequired,
-  isComplete,
   isCompromised,
+  hasError,
+  isSettled,
 }: SecurityStatusInput): SecurityStatus {
-  if (!isRemoteConfigReady) {
+  if (!isRemoteConfigSettled) {
     return SecurityStatus.LOADING;
   }
 
@@ -28,8 +31,12 @@ export function resolveSecurityStatus({
     return SecurityStatus.PASSED;
   }
 
-  if (!isComplete) {
+  if (!isSettled) {
     return SecurityStatus.LOADING;
+  }
+
+  if (hasError) {
+    return SecurityStatus.ERROR;
   }
 
   return isCompromised ? SecurityStatus.COMPROMISED : SecurityStatus.PASSED;

@@ -12,14 +12,12 @@ import type { AppVersionStatus } from './resolveAppVersionStatus';
 import { resolveAppVersionStatus } from './resolveAppVersionStatus';
 
 export function useAppVersionStatus(): AppVersionStatus {
-  const { config: remoteConfig, isReady: isRemoteConfigReady } =
+  const { config: remoteConfig, isSettled: isRemoteConfigSettled } =
     use(RemoteConfigContext);
 
-  const currentAppVersion = Application.nativeApplicationVersion ?? '0.0.0';
-
   return resolveAppVersionStatus({
-    currentAppVersion,
-    isRemoteConfigReady,
+    currentAppVersion: Application.nativeApplicationVersion ?? '0.0.0',
+    isRemoteConfigSettled,
     minVersion: remoteConfig.minVersion,
   });
 }

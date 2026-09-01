@@ -10,12 +10,12 @@ test.each([
   [true, '2.1.0', '2.0.0', AppVersionStatus.UP_TO_DATE],
 ])(
   'resolves ready=%s, current=%s, minimum=%s to %s',
-  (isReady, currentVersion, minimumVersion, expected) => {
+  (isSettled, currentVersion, minimumVersion, expected) => {
     // Arrange — versions and readiness are supplied by the table
     // Act — resolve the app version status
     const status = resolveAppVersionStatus({
       currentAppVersion: currentVersion,
-      isRemoteConfigReady: isReady,
+      isRemoteConfigSettled: isSettled,
       minVersion: minimumVersion,
     });
     // Assert — readiness is resolved before version comparison

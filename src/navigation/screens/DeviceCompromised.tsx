@@ -21,13 +21,12 @@ export function DeviceCompromised() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#e7edf4',
     flex: 1,
     justifyContent: 'center',
     padding: 16,
   },
   content: {
-    gap: 8,
+    gap: 16,
   },
   description: {
     color: '#475569',

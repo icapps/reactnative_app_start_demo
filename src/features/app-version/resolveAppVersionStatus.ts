@@ -10,17 +10,17 @@ export type AppVersionStatus =
   (typeof AppVersionStatus)[keyof typeof AppVersionStatus];
 
 type AppVersionStatusInput = {
-  isRemoteConfigReady: boolean;
+  isRemoteConfigSettled: boolean;
   currentAppVersion: string;
   minVersion: string;
 };
 
 export function resolveAppVersionStatus({
-  isRemoteConfigReady,
+  isRemoteConfigSettled,
   currentAppVersion,
   minVersion,
 }: AppVersionStatusInput): AppVersionStatus {
-  if (!isRemoteConfigReady) {
+  if (!isRemoteConfigSettled) {
     return AppVersionStatus.LOADING;
   }
 

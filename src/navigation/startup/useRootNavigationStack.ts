@@ -2,6 +2,7 @@ import { use } from 'react';
 
 import { AppVersionStatusContext } from '@/features/app-version/AppVersionStatusProvider';
 import { MaintenanceStatusContext } from '@/features/maintenance/MaintenanceStatusProvider';
+import { RemoteConfigContext } from '@/features/remote-config/RemoteConfigProvider';
 import { SecurityStatusContext } from '@/features/security/SecurityStatusProvider';
 
 import {
@@ -15,11 +16,13 @@ export { resolveNavigationStack } from './resolveNavigationStack';
 export function useRootNavigationStack(): RootNavigationStack {
   const { status: appVersionStatus } = use(AppVersionStatusContext);
   const { status: maintenanceStatus } = use(MaintenanceStatusContext);
+  const { status: remoteConfigStatus } = use(RemoteConfigContext);
   const { status: securityStatus } = use(SecurityStatusContext);
 
   return resolveNavigationStack({
     appVersionStatus,
     maintenanceStatus,
+    remoteConfigStatus,
     securityStatus,
   });
 }

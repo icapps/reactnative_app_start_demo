@@ -12,6 +12,7 @@ export const APP_START_CONFIG = {
         minMs: 250,
       },
       isActive: false,
+      shouldFail: false,
     },
     remoteConfig: {
       delayRangeMs: {
@@ -22,6 +23,7 @@ export const APP_START_CONFIG = {
       securityPolicy: {
         isRequired: true,
       },
+      shouldFail: false,
     },
     security: {
       delayRangeMs: {
@@ -29,6 +31,7 @@ export const APP_START_CONFIG = {
         minMs: 150,
       },
       isCompromised: false,
+      shouldFail: false,
     },
   },
 };

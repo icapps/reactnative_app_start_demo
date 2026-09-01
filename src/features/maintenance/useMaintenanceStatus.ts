@@ -7,18 +7,23 @@ export {
   resolveMaintenanceStatus,
 } from './resolveMaintenanceStatus';
 
-import type { MaintenanceStatus } from './resolveMaintenanceStatus';
 import { resolveMaintenanceStatus } from './resolveMaintenanceStatus';
 
-export function useMaintenanceStatus(): MaintenanceStatus {
-  const { isComplete } = useSimulatedStartupCheck({
+export function useMaintenanceStatus() {
+  const { hasError, isSettled, retry } = useSimulatedStartupCheck({
     ...APP_START_CONFIG.startup.maintenance.delayRangeMs,
-    onComplete: () => recordStartupStep('Maintenance', 'resolved'),
+    onError: () => recordStartupStep('Maintenance', 'error'),
     onStart: () => recordStartupStep('Maintenance', 'started'),
+    onSuccess: () => recordStartupStep('Maintenance', 'resolved'),
+    shouldFail: APP_START_CONFIG.startup.maintenance.shouldFail,
   });
 
-  return resolveMaintenanceStatus({
-    isActive: APP_START_CONFIG.startup.maintenance.isActive,
-    isComplete,
-  });
+  return {
+    retry,
+    status: resolveMaintenanceStatus({
+      hasError,
+      isActive: APP_START_CONFIG.startup.maintenance.isActive,
+      isSettled,
+    }),
+  };
 }

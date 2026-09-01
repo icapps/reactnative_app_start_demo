@@ -7,18 +7,20 @@ import {
 } from './useSecurityStatus';
 
 type SecurityStatusContextValue = {
+  retry: () => void;
   status: SecurityStatusType;
 };
 
 export const SecurityStatusContext = createContext<SecurityStatusContextValue>({
+  retry: () => undefined,
   status: SecurityStatus.LOADING,
 });
 
 export function SecurityStatusProvider({ children }: { children: ReactNode }) {
-  const status = useSecurityStatus();
+  const { retry, status } = useSecurityStatus();
 
   return (
-    <SecurityStatusContext.Provider value={{ status }}>
+    <SecurityStatusContext.Provider value={{ retry, status }}>
       {children}
     </SecurityStatusContext.Provider>
   );

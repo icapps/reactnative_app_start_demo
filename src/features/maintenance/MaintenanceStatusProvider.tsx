@@ -7,11 +7,13 @@ import {
 } from './useMaintenanceStatus';
 
 type MaintenanceStatusContextValue = {
+  retry: () => void;
   status: MaintenanceStatusType;
 };
 
 export const MaintenanceStatusContext =
   createContext<MaintenanceStatusContextValue>({
+    retry: () => undefined,
     status: MaintenanceStatus.LOADING,
   });
 
@@ -20,10 +22,10 @@ export function MaintenanceStatusProvider({
 }: {
   children: ReactNode;
 }) {
-  const status = useMaintenanceStatus();
+  const { retry, status } = useMaintenanceStatus();
 
   return (
-    <MaintenanceStatusContext.Provider value={{ status }}>
+    <MaintenanceStatusContext.Provider value={{ retry, status }}>
       {children}
     </MaintenanceStatusContext.Provider>
   );
